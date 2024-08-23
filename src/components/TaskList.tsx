@@ -1,11 +1,26 @@
-import React from 'react'
+import React from 'react';
+import TaskItem from './TaskItem';
+import { Task } from '../model';
 
-const TaskList = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+interface TaskListProps {
+  tasks: Task[];
+  toggleComplete: (id: number) => void;
+  deleteTask: (id: number) => void;
 }
 
-export default TaskList
+const TaskList: React.FC<TaskListProps> = ({ tasks, toggleComplete, deleteTask }) => {
+  return (
+    <div>
+      {tasks.map(task => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          toggleComplete={toggleComplete}
+          deleteTask={deleteTask}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default TaskList;
